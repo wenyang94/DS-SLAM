@@ -29,28 +29,28 @@ find_package(Eigen3 3.1.0 REQUIRED)
 find_package(Pangolin REQUIRED)
 
 # adding for point cloud viewer and mapper
-find_package( PCL 1.7 REQUIRED )
-find_package(catkin REQUIRED COMPONENTS 
-  roscpp
-  sensor_msgs
-  message_generation
-  tf
-  )
+# find_package( PCL 1.7 REQUIRED )
+# find_package(catkin REQUIRED COMPONENTS 
+#   roscpp
+#   sensor_msgs
+#   message_generation
+#   tf
+#   )
 
 include_directories(
 ${PROJECT_SOURCE_DIR}
 ${PROJECT_SOURCE_DIR}/include
 ${EIGEN3_INCLUDE_DIR}
 ${Pangolin_INCLUDE_DIRS}
-${PCL_INCLUDE_DIRS}
+# ${PCL_INCLUDE_DIRS}
 ${OpenCV_INCLUDE_DIRS}
-${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/caffe-segnet-cudnn5/include 
-${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/caffe-segnet-cudnn5/build/include
+# ${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/caffe-segnet-cudnn5/include 
+# ${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/caffe-segnet-cudnn5/build/include
 /usr/local/include  
-/usr/local/cuda/include
+# /usr/local/cuda/include
 /usr/include  
-${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/libsegmentation
-${catkin_INCLUDE_DIRS}
+# ${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/libsegmentation
+# ${catkin_INCLUDE_DIRS}
 )
 
 #set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
@@ -76,21 +76,23 @@ src/Viewer.cc
 src/PangolinViewer.cc
 src/FrameDrawer.cc
 src/MapDrawer.cc
-src/pointcloudmapping.cc
-src/Segment.cc
+# src/pointcloudmapping.cc
+# src/Segment.cc
+src/yolo.cc
 )
 
 target_link_libraries(${PROJECT_NAME}
 ${OpenCV_LIBS}
 ${EIGEN3_LIBS}
 ${Pangolin_LIBRARIES}
-${PCL_LIBRARIES}
+# ${PCL_LIBRARIES}
 ${PROJECT_SOURCE_DIR}/Thirdparty/DBoW2/lib/libDBoW2.so
 ${PROJECT_SOURCE_DIR}/Thirdparty/g2o/lib/libg2o.so
-${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/caffe-segnet-cudnn5/build/lib/libcaffe.so  
+# ${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/caffe-segnet-cudnn5/build/lib/libcaffe.so  
 /usr/lib/x86_64-linux-gnu/libglog.so  
 -lboost_system
-${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/libsegmentation/build/libsegmentation.so
-${catkin_LIBRARIES}
+# ${PROJECT_SOURCE_DIR}/Examples/ROS/ORB_SLAM2_PointMap_SegNetM/libsegmentation/build/libsegmentation.so
+# ${catkin_LIBRARIES}
 )
 
+add_executable(yolo src/yolo.cc)
